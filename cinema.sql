@@ -144,8 +144,8 @@ SELECT
 	ac.id_acteur,
 	p.prenom,
 	p.nom,
-	YEAR(p.date_naissance) AS dateBirth,
-	YEAR(NOW()) AS currentYear
+	DATE_FORMAT(p.date_naissance, '%Y') AS dateBirth,
+	DATE_FORMAT(NOW(), '%Y') AS currentYear
 FROM
 	acteur ac
 INNER JOIN personne p ON p.id_personne = ac.id_personne
@@ -153,7 +153,7 @@ GROUP BY
 	ac.id_acteur,
 	p.prenom,
 	p.nom
-HAVING SUM(currentYear - dateBirth) >= 50
+HAVING currentYear - dateBirth >= 50
 
 
 -- l. Acteurs ayant joué dans 3 films ou plus
